@@ -1,0 +1,85 @@
+<html>
+
+<head>
+    <title>payment intents</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+<H3>Payment intents manual flow</H3>
+
+<script src="https://js.stripe.com/v3/"></script>
+
+<div id="card-element" style="width:400px"></div>
+<br>
+<button id="card-button">Submit Payment</button>
+
+<script>
+    var stripe = Stripe('{{ stripe_public_key }}');
+    var elements = stripe.elements();
+    var cardElement = elements.create('card', {hidePostalCode: true});
+    cardElement.mount('#card-element');
+
+var cardButton = document.getElementById('card-button');
+
+cardButton.addEventListener('click', function(ev) {
+  stripe.createPaymentMethod('card', cardElement, {
+  }).then(function(result) {
+    if (result.error) {
+        alert(result.error);
+      // Show error in payment form
+    } else {
+      // Otherwise send paymentMethod.id to your server (see Step 2)
+      fetch('{{ confirm_payment_endpoint }}', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ payment_method_id: result.paymentMethod.id })
+      }).then(function(result) {
+        // Handle server response (see Step 3)
+        result.json().then(function(json) {
+          handleServerResponse(json);
+        })
+      });
+    }
+  });
+});
+
+
+function handleServerResponse(response) {
+  if (response.error) {
+    // Show error from server on payment form
+    alert('error');
+  } else if (response.requires_action) {
+    // Use Stripe.js to handle required card action
+    stripe.handleCardAction(
+      response.payment_intent_client_secret
+    ).then(function(result) {
+      if (result.error) {
+        // Show error in payment form
+      } else {
+        // The card action has been handled
+        // The PaymentIntent can be confirmed again on the server
+        fetch('{{ confirm_payment_endpoint }}', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ payment_intent_id: result.paymentIntent.id })
+        }).then(function(confirmResult) {
+          return confirmResult.json();
+        }).then(handleServerResponse);
+      }
+    });
+  } else {
+    // Show success message
+    alert('success');
+  }
+}
+
+
+
+
+</script>
+
+</body>
+
+</html>

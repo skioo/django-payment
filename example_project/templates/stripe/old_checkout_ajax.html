@@ -1,0 +1,43 @@
+<html>
+
+<body>
+
+<script>
+
+fetch('{{ payment_params_endpoint }}')
+.then(response => response.json())
+.then(data => {
+  console.log(data);
+  var form = build_form(data);
+  console.log(form);
+  document.getElementsByTagName('body')[0].appendChild(form);
+})
+.catch(error => console.error(error));
+
+function build_form(payment_params) {
+    if (payment_params.gateway != 'stripe') {
+        console.error('Cannot handle payment for gateway' + payment_params.gateway);
+        return;
+    }
+
+    var form = document.createElement('form');
+    form.setAttribute('method','post');
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://checkout.stripe.com/checkout.js');
+    script.setAttribute('class', 'stripe-button');
+    var ps = payment_params.params;
+    Object.keys(ps).forEach(key => {
+        script.setAttribute('data-' + key, ps[key])
+    });
+    form.appendChild(script);
+
+    return form;
+}
+
+
+</script>
+
+</body>
+
+</html>

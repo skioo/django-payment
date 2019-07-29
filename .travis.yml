@@ -1,0 +1,35 @@
+dist: xenial
+
+sudo: false
+
+language: python
+
+python:
+  - 3.6
+  - 3.7
+
+install: pip install tox-travis coveralls
+
+script: tox
+
+stages:
+  - test
+  - name: deploy
+    if: tag IS present
+
+jobs:
+  include:
+    - stage: deploy
+      install: skip
+      script: skip
+      deploy:
+        provider: pypi
+        user: skioo
+        password:
+          secure: "bMMhRbHn4ZPdoGAuMoHIZdpt0Op73IKc1bi0xo6kHONJXbGFli2xJXYZNz9DjiqKn2WzvQkkxnjv4yMH1jdda01XlIdqKJPxlxzEYvInMBbrbKWv7mktbneJVDYw9cX9NcXkT0sFqH8r2htoVksBg0q4nQFp2fxjELDRYmdA3QjjTEVX8nw/eNElc8sSCdC5HmVaIpPN7yIrLO3Qe+f0RFEgkV8nTvrDQ3Nsg+SbQPWf78iBj7+3+8c6HvhKvDX+Wc01NCZSsM7NPtNqpv3907SGN56mPGVdCmW7aTLNWyf3zZeD2w5TRVNoUehcx7mMahJbCW0rBSAECVHVXUGJm35cbSk4OP5NPqJNCxlEQcfoqrEpvUayyLBsVK5cAjWS0k6A2l/TqXOzJ8UPIR/94aiD6X4FKxydFhhXf1ywevyi71mz/H2nESc18sOUgmPjjCrKAIxv/7phEYJ2FPB53Tg8zWQoLfB1ixu3kh/LoZmbmhnk27NfosXflnEsii/E1pSQ+QSnyDH4SvKeQCrSbmZvIc1MWoTCdMmtizew9MgzHbI/aG7TbttOzHjYYGG+iBMZTr0yMf+M/bej3sDglK7GJksJjYurpmR86B2f/s4gKdXFZ2Dl3/xmgLpHE/O/RYVWXqbv+1zuVtSQ9TZSHTW8HDVDb3ab56Jv6HoRb60="
+        distribution: sdist bdist_wheel
+        on:
+          tags: true
+
+after_success:
+  - coveralls

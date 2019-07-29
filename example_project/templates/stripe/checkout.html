@@ -1,0 +1,25 @@
+<html>
+
+<body>
+
+<H3>Redirecting to stripe checkout</H3>
+
+
+<script src="https://js.stripe.com/v3/"></script>
+
+<script>
+
+    var stripe = Stripe('pk_test_ZVhesIICeGAEzZCbIs0U2BC6');
+
+    stripe.redirectToCheckout({
+        sessionId: '{{CHECKOUT_SESSION_ID}}'
+    }).then(function (result) {
+        // Failure handler
+        alert(result.error.message);
+    });
+
+</script>
+
+</body>
+
+</html>
