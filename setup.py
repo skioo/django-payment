@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='django-payment',
-    version='1.0',
+    version='1.1',
     description='',
     long_description='',
     author='Nicholas Wolff',
@@ -13,9 +13,9 @@ setup(
     packages=[
         'payment',
         'payment.gateways',
+        'payment.migrations',
         'payment.gateways.dummy',
         'payment.gateways.stripe',
-        'payment.migrations',
     ],
     package_data={
         'payment': [

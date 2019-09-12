@@ -48,3 +48,9 @@ This package contains:
 - A modified copy of stripe/init.py (to fix a bug when we just want to authorize)
 - A new localized django admin for payments and transactions.
 
+
+Possible enhancements
+---------------------
+
+Right now the beginning of the flow for all gateways is implemented outside of the Payment abstractions.
+Maybe implement the authorization phase inside the payment abstraction?

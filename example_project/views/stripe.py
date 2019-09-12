@@ -1,51 +1,16 @@
 from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.template.response import TemplateResponse
-from django.urls import reverse
+from django.urls import reverse, path
 from django.views.decorators.csrf import csrf_exempt
 from structlog import get_logger
 
 from payment import get_payment_gateway
 from payment.gateways.stripe import get_amount_for_stripe, get_currency_for_stripe
 from payment.models import Payment
-from payment.utils import gateway_authorize, gateway_capture, gateway_refund
+from payment.utils import gateway_authorize
 
 logger = get_logger()
-
-
-def capture(request: HttpRequest, payment_id: int) -> HttpResponse:
-    payment = get_object_or_404(Payment, id=payment_id)
-    capture_result = gateway_capture(payment=payment)
-    logger.info('stripe capture', payment=payment, capture_result=capture_result)
-    return redirect('view_payment', payment_id=payment_id)
-
-
-def checkout(request: HttpRequest, payment_id: int) -> HttpResponse:
-    """
-    Takes the user to the stripe checkout page.
-    This is not part of the gateway abstraction, so we implement it directly using the stripe API
-    """
-    payment = get_object_or_404(Payment, id=payment_id)
-
-    import stripe
-    stripe.api_key = 'sk_test_QWtEpnVswmgW9aUJkyKmEutp00dsgn2KAa'
-
-    session = stripe.checkout.Session.create(
-        payment_method_types=['card'],
-        customer_email=payment.customer_email,
-        line_items=[{
-            'name': 'Your order',
-            'amount': get_amount_for_stripe(payment.total.amount, payment.total.currency.code),
-            'currency': get_currency_for_stripe(payment.total.currency.code),
-            'quantity': 1,
-        }],
-        payment_intent_data={
-            'capture_method': 'manual',
-        },
-        success_url='https://example.com/success',
-        cancel_url='https://example.com/cancel',
-    )
-    return TemplateResponse(request, 'stripe/checkout.html', {'CHECKOUT_SESSION_ID': session.id})
 
 
 @csrf_exempt
@@ -71,6 +36,35 @@ def elements_token(request: HttpRequest, payment_id: int) -> HttpResponse:
             return HttpResponse('Error authorizing {}: {}'.format(payment_id, exc))
         else:
             return redirect('view_payment', payment_id=payment.pk)
+
+
+def checkout(request: HttpRequest, payment_id: int) -> HttpResponse:
+    """
+    Takes the user to the stripe checkout page.
+    XXX: This is incomplete because we don't fulfill the order in the end (we should most likely use webhooks).
+         We mainly implemented this to see what the checkout page looks like.
+    """
+    payment = get_object_or_404(Payment, id=payment_id)
+
+    import stripe
+    stripe.api_key = 'sk_test_QWtEpnVswmgW9aUJkyKmEutp00dsgn2KAa'
+
+    session = stripe.checkout.Session.create(
+        payment_method_types=['card'],
+        customer_email=payment.customer_email,
+        line_items=[{
+            'name': 'Your order',
+            'amount': get_amount_for_stripe(payment.total.amount, payment.total.currency.code),
+            'currency': get_currency_for_stripe(payment.total.currency.code),
+            'quantity': 1,
+        }],
+        payment_intent_data={
+            'capture_method': 'manual',
+        },
+        success_url='https://example.com/success',
+        cancel_url='https://example.com/cancel',
+    )
+    return TemplateResponse(request, 'stripe/checkout.html', {'CHECKOUT_SESSION_ID': session.id})
 
 
 def payment_intents_manual_flow(request: HttpRequest, payment_id: int) -> HttpResponse:
@@ -129,3 +123,13 @@ def payment_intents_confirm_payment(request, payment_id):
     else:
         # Invalid status
         return JsonResponse({'error': 'Invalid PaymentIntent status'}, status=500)
+
+
+urls = [
+    path('elements_token/<payment_id>', elements_token, name='stripe_elements_token'),
+    path('checkout/<payment_id>', checkout, name='stripe_checkout'),
+    path('payment_intents_manual_flow/<payment_id>', payment_intents_manual_flow,
+         name='stripe_payment_intents_manual_flow'),
+    path('payment_intents_confirm_payment/<payment_id>', payment_intents_confirm_payment,
+         name='stripe_payment_intents_confirm_payment'),
+]

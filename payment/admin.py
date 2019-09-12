@@ -12,8 +12,7 @@ from import_export.formats import base_formats
 from moneyed.localization import format_money
 
 from .export import PaymentResource
-from .models import Payment
-from .models import Transaction
+from .models import Payment, Transaction
 from .utils import gateway_refund
 
 
@@ -67,6 +66,7 @@ class TransactionInline(admin.TabularInline):
 
 @admin.register(Transaction)
 class TransactionAdmin(admin.ModelAdmin):
+    readonly_fields = ['created']
 
     def has_module_permission(self, request):
         # Prevent TransactionAdmin from appearing in the admin menu,

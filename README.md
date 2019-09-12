@@ -25,9 +25,18 @@ Add payment and import_export to your `INSTALLED_APPS`:
     )
 
 
-Run the migrations: 
+Create the payment tables by running the migrations: 
 
     ./manage.py migrate
+
+
+Add payment urls to your urlpatterns: 
+
+    urlpatterns = [
+        ...
+        path('payment/', include('payment.urls')),
+        ...
+     ]
 
 
 Configure the CHECKOUT_PAYMENT_GATEWAYS and PAYMENT_GATEWAYS settings. See [example settings.py](example_project/settings.py)
@@ -37,12 +46,13 @@ Configure the CHECKOUT_PAYMENT_GATEWAYS and PAYMENT_GATEWAYS settings. See [exam
 This module provides implementations for the following payment-gateways:
 
 ### Stripe 
-Implemented features:
-- Simple Payment (authorization and capture at once)
-- Separate authorization and capture
-- Refunds
+- Authorization
+- Capture
+- Refund
 - Split Payment with stripe connect
 - Adding metadata to the stripe payment, for easy sorting in stripe
+
+[More Stripe information](docs/stripe.md)
 
 
 ## The example project
@@ -67,7 +77,7 @@ Then point your browser to:
 
     http://127.0.0.1:8000/admin
     
-Create a new payment.
+Create a new payment (make sure the captured amount currency is the same as the total currency)
 
 Then operate on that payment with:
 
@@ -94,6 +104,4 @@ To install the version being developed into another django project:
     pip install -e <path-to-this-directory>
 
 
-## More information
-
-* [The design of this application](docs/design.md)
+More information about [the design of this application](docs/design.md)
