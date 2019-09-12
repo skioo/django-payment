@@ -20,7 +20,6 @@ stripe_urls = [
     path('<payment_id>/stripe/payment_intents_confirm_payment', stripe.payment_intents_confirm_payment,
          name='stripe_payment_intents_confirm_payment'),
     path('<payment_id>/stripe/capture', stripe.capture, name='stripe_capture'),
-    path('<payment_id>/stripe/refund', stripe.refund, name='stripe_refund'),
 ]
 
 

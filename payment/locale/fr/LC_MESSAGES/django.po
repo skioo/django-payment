@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-29 07:50-0500\n"
-"PO-Revision-Date: 2019-07-29 12:51+0000\n"
+"POT-Creation-Date: 2019-09-12 09:24-0500\n"
+"PO-Revision-Date: 2019-09-12 14:25+0000\n"
 "Last-Translator: b'  <admin@example.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -69,25 +69,31 @@ msgctxt "payment status"
 msgid "Fully refunded"
 msgstr "Remboursé"
 
-#: admin.py:17 models.py:228
+#: admin.py:28 models.py:168
 msgid "amount"
 msgstr "montant"
 
-#: admin.py:25 models.py:97 models.py:222
+#: admin.py:36 models.py:37 models.py:162
 msgid "created"
 msgstr "créé"
 
-#: admin.py:33 models.py:98
+#: admin.py:44 models.py:38
 msgid "modified"
 msgstr "modifié"
 
-#: admin.py:143 models.py:102
+#: admin.py:127 models.py:42
 msgid "total"
 msgstr "total"
 
-#: admin.py:149 models.py:103
+#: admin.py:133 models.py:43
 msgid "captured amount"
 msgstr "montant capturé"
+
+#: admin.py:150 admin.py:154
+#| msgctxt "transaction kind"
+#| msgid "Refund"
+msgid "Refund"
+msgstr "Remboursement"
 
 #: apps.py:7
 msgid "Payment"
@@ -121,88 +127,87 @@ msgctxt "Stripe payment gateway description"
 msgid "Total payment"
 msgstr "Paiement total"
 
-#: models.py:95
+#: models.py:35
 msgid "gateway"
 msgstr "passerelle"
 
-#: models.py:96
+#: models.py:36
 msgid "is_active"
 msgstr "actif?"
 
-#: models.py:99
+#: models.py:39
 msgid "charge status"
 msgstr "Status paiement"
 
-#: models.py:101 models.py:225
+#: models.py:41 models.py:165
 msgid "token"
 msgstr "jeton"
 
-#: models.py:105
+#: models.py:45
 msgid "cc first digits"
 msgstr "cc premiers chiffres"
 
-#: models.py:106
+#: models.py:46
 msgid "cc last digits"
 msgstr "cc derniers chiffres"
 
-#: models.py:107
+#: models.py:47
 msgid "cc brand"
 msgstr "cc marque"
 
-#: models.py:108
+#: models.py:48
 msgid "cc exp month"
 msgstr "cc mois d'expiration"
 
-#: models.py:111
+#: models.py:51
 msgid "cc exp year"
 msgstr "cc année d'expiration"
 
-#: models.py:114
+#: models.py:54
 msgid "customer email"
 msgstr "email client"
 
-#: models.py:116
+#: models.py:56
 msgid "customer ip address"
 msgstr "adresse ip client"
 
-#: models.py:117
+#: models.py:57
 msgid "extra data"
 msgstr "données supplémentaires"
 
-#: models.py:120 models.py:224
+#: models.py:60 models.py:164
 msgid "payment"
 msgstr "paiement"
 
-#: models.py:121
+#: models.py:61
 msgid "payments"
 msgstr "paiements"
 
-#: models.py:125
-#, fuzzy
+#: models.py:65
 #| msgid "Payment %s (%s)"
 msgid "Payment {} ({})"
 msgstr "Paiement {} ({})"
 
-#: models.py:226
+#: models.py:166
 msgid "kind"
 msgstr "type"
 
-#: models.py:227
+#: models.py:167
 msgid "is success"
 msgstr "succès?"
 
-#: models.py:229
+#: models.py:169
 msgid "error"
 msgstr "erreur"
 
-#: models.py:230
+#: models.py:170
 msgid "gateway response"
 msgstr "réponse passerelle"
 
-#: models.py:233
+#: models.py:173
 msgid "transaction"
 msgstr "transaction"
 
-#: models.py:234
+#: models.py:174
 msgid "transactions"
 msgstr "transactions"

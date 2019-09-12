@@ -16,6 +16,5 @@
     <li><a href="{% url 'stripe_checkout' payment.id %}">Authorize - Checkout</a></li>
     <li><a href="{% url 'stripe_payment_intents_manual_flow' payment.id %}">Authorize - Payment intents manual flow</a></li>
     <li><a href="{% url 'stripe_capture' payment.id %}">Capture</a></li>
-    <li><a href="{% url 'stripe_refund' payment.id %}">Refund</a></li>
 </ul>
 

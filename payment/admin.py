@@ -1,11 +1,20 @@
+from django.conf.urls import url
 from django.contrib import admin
+from django.forms import forms
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render
+from django.urls import reverse
+from django.utils.html import format_html
 from django.utils.translation import ugettext_lazy as _
+from djmoney.forms import MoneyField
 from import_export.admin import ExportMixin
 from import_export.formats import base_formats
 from moneyed.localization import format_money
 
 from .export import PaymentResource
-from .models import Payment, Transaction
+from .models import Payment
+from .models import Transaction
+from .utils import gateway_refund
 
 
 ##############################################################
@@ -68,6 +77,35 @@ class TransactionAdmin(admin.ModelAdmin):
 ##############################################################
 # Payments
 
+
+class RefundPaymentForm(forms.Form):
+    amount = MoneyField(min_value=0)
+
+
+def refund_payment_form(request, payment_id):
+    payment = get_object_or_404(Payment, pk=payment_id)
+    if request.method == 'POST':
+        form = RefundPaymentForm(request.POST)
+        if form.is_valid():
+            gateway_refund(
+                payment=payment,
+                amount=form.cleaned_data['amount'])
+            # As confirmation we take the user to the payment page
+            return HttpResponseRedirect(reverse('admin:payment_payment_change', args=[payment_id]))
+    else:
+        form = RefundPaymentForm(initial={'amount': payment.captured_amount})
+
+    return render(
+        request,
+        'admin/payment/form.html',
+        {
+            'title': 'Refund to {}, for payment with total: {}'.format(payment.gateway, payment.total),
+            'form': form,
+            'opts': Payment._meta,  # Used to setup the navigation / breadcrumbs of the page
+        }
+    )
+
+
 @admin.register(Payment)
 class PaymentAdmin(ExportMixin, admin.ModelAdmin):
     date_hierarchy = 'created'
@@ -77,6 +115,7 @@ class PaymentAdmin(ExportMixin, admin.ModelAdmin):
                     'customer_email']
     search_fields = ['customer_email', 'token', 'total', 'id']
 
+    readonly_fields = ['created', 'modified', 'refund_button']
     inlines = [TransactionInline]
 
     resource_class = PaymentResource
@@ -92,3 +131,24 @@ class PaymentAdmin(ExportMixin, admin.ModelAdmin):
             return format_money(obj.captured_amount)
 
     formatted_captured_amount.short_description = _('captured amount')  # type: ignore
+
+    def get_urls(self):
+        urls = super().get_urls()
+        my_urls = [
+            url(
+                r'^(?P<payment_id>[0-9a-f-]+)/refund/$',
+                self.admin_site.admin_view(refund_payment_form),
+                name='payment_refund',
+            ),
+        ]
+        return my_urls + urls
+
+    def refund_button(self, payment):
+        if payment.can_refund():
+            return format_html('<a class="button" href="{}">{}</a>',
+                               reverse('admin:payment_refund', args=[payment.pk]),
+                               _('Refund'))
+        else:
+            return '-'
+
+    refund_button.short_description = _('Refund')  # type: ignore

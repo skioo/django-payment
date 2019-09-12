@@ -18,7 +18,11 @@ setup(
         'payment.migrations',
     ],
     package_data={
-        'payment': ['locale/*/LC_MESSAGES/*.*', ]},
+        'payment': [
+            'locale/*/LC_MESSAGES/*.*',
+            'templates/admin/payment/*.html',
+        ]
+    },
     install_requires=[
         'Django>=2.2,<2.3',
         'django-money',

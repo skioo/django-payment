@@ -20,13 +20,6 @@ def capture(request: HttpRequest, payment_id: int) -> HttpResponse:
     return redirect('view_payment', payment_id=payment_id)
 
 
-def refund(request: HttpRequest, payment_id: int) -> HttpResponse:
-    payment = get_object_or_404(Payment, id=payment_id)
-    refund_result = gateway_refund(payment=payment)
-    logger.info('stripe refund', payment=payment, refund_result=refund_result)
-    return redirect('view_payment', payment_id=payment_id)
-
-
 def checkout(request: HttpRequest, payment_id: int) -> HttpResponse:
     """
     Takes the user to the stripe checkout page.
