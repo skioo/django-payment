@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='django-payment',
-    version='0.8',
+    version='1.0',
     description='',
     long_description='',
     author='Nicholas Wolff',
@@ -27,12 +27,12 @@ setup(
         'stripe',
         'django-countries',
         'dataclasses',
+        'django-import-export',
     ],
     license='MIT',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',
-        'Framework :: Django :: 2.1',
         'Framework :: Django :: 2.2',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',

@@ -15,11 +15,12 @@
 ## Usage
 To use django-payments in your existing django project:
 
-Add payment to your `INSTALLED_APPS`:
+Add payment and import_export to your `INSTALLED_APPS`:
 
     INSTALLED_APPS = (
         ...
-        'payment.apps.PaymentConfig,
+        'payment.apps.PaymentConfig',
+        'import_export',
         ...
     )
 

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'djmoney',
     'tests',
     'payment.apps.PaymentConfig',
+    'import_export',
 ]
 
 MIDDLEWARE = [
@@ -78,7 +79,6 @@ TEMPLATES = [
 
 # Enable specific currencies (djmoney)
 CURRENCIES = ['USD', 'EUR', 'JPY', 'GBP', 'CAD', 'CHF']
-
 
 DUMMY = "dummy"
 STRIPE = "stripe"

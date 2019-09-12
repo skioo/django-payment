@@ -1,7 +1,10 @@
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
+from import_export.admin import ExportMixin
+from import_export.formats import base_formats
 from moneyed.localization import format_money
 
+from .export import PaymentResource
 from .models import Payment, Transaction
 
 
@@ -66,7 +69,7 @@ class TransactionAdmin(admin.ModelAdmin):
 # Payments
 
 @admin.register(Payment)
-class PaymentAdmin(admin.ModelAdmin):
+class PaymentAdmin(ExportMixin, admin.ModelAdmin):
     date_hierarchy = 'created'
     ordering = ['-created']
     list_filter = ['gateway', 'is_active', 'charge_status']
@@ -75,6 +78,9 @@ class PaymentAdmin(admin.ModelAdmin):
     search_fields = ['customer_email', 'token', 'total', 'id']
 
     inlines = [TransactionInline]
+
+    resource_class = PaymentResource
+    formats = (base_formats.CSV, base_formats.XLS, base_formats.JSON)  # Only useful and safe formats.
 
     def formatted_total(self, obj):
         return format_money(obj.total)
