@@ -54,6 +54,13 @@ This module provides implementations for the following payment-gateways:
 
 [More Stripe information](docs/stripe.md)
 
+### Netaxept
+Implemented features:
+- Authorization
+- Capture
+- Refund
+
+[More Netaxept information](docs/netaxept.md)
 
 ## The example project
 The source distribution includes an example project that lets one exercise 
@@ -75,7 +82,7 @@ Install the django-payment dependencies (the example project has identical depen
 
 Then point your browser to:
 
-    http://127.0.0.1:8000/admin
+    http://127.0.0.1:8000/admin/
     
 Create a new payment (make sure the captured amount currency is the same as the total currency)
 
@@ -94,7 +101,8 @@ To run unit tests:
     pip install pytest-django
     pytest
 
-To lint, typecheck, test, and verify you didn't forget to create a migration:
+To lint, typecheck, test on all supported versions of python and django.
+Also to verify you didn't forget to create a migration:
 
     pip install tox
     tox

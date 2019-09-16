@@ -1,5 +1,5 @@
 import stripe
-from typing import Dict
+from typing import Dict, Optional
 
 from . import connect
 from .forms import StripePaymentModalForm
@@ -183,7 +183,7 @@ def _create_stripe_charge(client, payment_information, should_capture: bool):
 
 
 def _create_response(
-        payment_information: PaymentData, kind: str, response: Dict, error: str
+        payment_information: PaymentData, kind: str, response: Dict, error: Optional[str]
 ) -> GatewayResponse:
     # Get currency from response or payment
     currency = get_currency_from_stripe(

@@ -59,6 +59,8 @@ MEDIA_URL = '/media/'
 
 ROOT_URLCONF = 'urls'
 
+DATETIME_FORMAT = "Y-m-d @ H:i:s e"
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -80,14 +82,16 @@ TEMPLATES = [
 DATETIME_FORMAT = 'Y-m-d @ H:i:s e'
 
 # Enable specific currencies (djmoney)
-CURRENCIES = ['USD', 'EUR', 'JPY', 'GBP', 'CAD', 'CHF']
+CURRENCIES = ['USD', 'EUR', 'JPY', 'GBP', 'CAD', 'CHF', 'NOK']
 
 DUMMY = 'dummy'
 STRIPE = 'stripe'
+NETAXEPT = 'netaxept'
 
 CHECKOUT_PAYMENT_GATEWAYS = {
     DUMMY: 'Dummy gateway',
     STRIPE: 'Stripe',
+    NETAXEPT: 'Netaxept',
 }
 
 PAYMENT_GATEWAYS = {
@@ -116,5 +120,18 @@ PAYMENT_GATEWAYS = {
                 'enable_shipping_address': os.environ.get('STRIPE_ENABLE_SHIPPING_ADDRESS', False),
             },
         },
+    },
+    NETAXEPT: {
+        'module': 'payment.gateways.netaxept',
+        'config': {
+            'auto_capture': True,
+            'template_path': 'payment/netaxept.html',
+            'connection_params': {
+                'base_url': os.environ.get('NETAXEPT_BASE_URL') or 'https://test.epayment.nets.eu',
+                'after_terminal_url': 'http://localhost:8000/example/netaxept/after_terminal',
+                'merchant_id': os.environ.get('NETAXEPT_MERCHANT_ID'),
+                'secret': os.environ.get('NETAXEPT_SECRET'),
+            }
+        }
     },
 }

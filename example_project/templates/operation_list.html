@@ -12,7 +12,6 @@
     <li>captured amount: {{ payment.captured_amount }}</li>
 </ul>
 
-<a href="{%url 'admin:payment_payment_change' payment.id %}">See payment in admin </a>
 
 <H3>Operations</H3>
 <ul>
@@ -20,9 +19,10 @@
     <li><a href="{% url 'stripe_elements_token' payment.id %}">Authorize - Elements token</a></li>
     <li><a href="{% url 'stripe_checkout' payment.id %}">Authorize - Checkout</a></li>
     <li><a href="{% url 'stripe_payment_intents_manual_flow' payment.id %}">Authorize - Payment intents manual flow</a>
+{% elif payment.gateway == 'netaxept' %}
+    <li><a href="{% url 'netaxept_register_and_authorize' payment.id %}">Register and Authorize</a></li>
 {% endif %}
-
-    <li><a href="{% url 'capture' payment.id %}">Capture</a></li>
+    <li><a href="{%url 'admin:payment_payment_change' payment.id %}">See payment in admin</a></li>
 </ul>
 
 </body>

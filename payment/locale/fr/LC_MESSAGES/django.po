@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-12 09:24-0500\n"
-"PO-Revision-Date: 2019-09-12 14:25+0000\n"
+"POT-Creation-Date: 2019-09-16 16:06+0200\n"
+"PO-Revision-Date: 2019-09-16 14:06+0000\n"
 "Last-Translator: b'  <admin@example.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -24,76 +24,97 @@ msgctxt "Custom payment choice type"
 msgid "Manual"
 msgstr "Manuel"
 
-#: __init__.py:70
+#: __init__.py:72
+#| msgid "transaction"
+msgctxt "transaction kind"
+msgid "Registration"
+msgstr "Enregistrement"
+
+#: __init__.py:73
 msgctxt "transaction kind"
 msgid "Authorization"
 msgstr "Autorisation"
 
-#: __init__.py:71
+#: __init__.py:74
 msgctxt "transaction kind"
 msgid "Refund"
 msgstr "Remboursement"
 
-#: __init__.py:72
+#: __init__.py:75
 msgctxt "transaction kind"
 msgid "Capture"
 msgstr "Capture"
 
-#: __init__.py:73
+#: __init__.py:76
 msgctxt "transaction kind"
 msgid "Void"
 msgstr "Annulation"
 
-#: __init__.py:97
+#: __init__.py:100
 msgctxt "payment status"
 msgid "Not charged"
 msgstr "Non payé"
 
-#: __init__.py:98
+#: __init__.py:101
 msgctxt "payment status"
 msgid "Partially charged"
 msgstr "Payé en partie"
 
-#: __init__.py:99
+#: __init__.py:102
 msgctxt "payment status"
 msgid "Fully charged"
 msgstr "Payé"
 
-#: __init__.py:100
+#: __init__.py:103
 msgctxt "payment status"
 msgid "Partially refunded"
 msgstr "Remboursé en partie "
 
-#: __init__.py:101
+#: __init__.py:104
 msgctxt "payment status"
 msgid "Fully refunded"
 msgstr "Remboursé"
 
-#: admin.py:28 models.py:168
+#: admin.py:29 models.py:168
 msgid "amount"
 msgstr "montant"
 
-#: admin.py:36 models.py:37 models.py:162
+#: admin.py:37 models.py:37 models.py:162
 msgid "created"
 msgstr "créé"
 
-#: admin.py:44 models.py:38
+#: admin.py:45 models.py:38
 msgid "modified"
 msgstr "modifié"
 
-#: admin.py:127 models.py:42
+#: admin.py:179 models.py:42
 msgid "total"
 msgstr "total"
 
-#: admin.py:133 models.py:43
+#: admin.py:185 models.py:43
 msgid "captured amount"
 msgstr "montant capturé"
 
-#: admin.py:150 admin.py:154
+#: admin.py:208
 #| msgctxt "transaction kind"
-#| msgid "Refund"
+#| msgid "Capture"
+msgid "Capture"
+msgstr "Capture"
+
+#: admin.py:213
 msgid "Refund"
 msgstr "Remboursement"
+
+#: admin.py:218
+#| msgctxt "transaction kind"
+#| msgid "Void"
+msgid "Void"
+msgstr "Annulation"
+
+#: admin.py:222
+#| msgid "transaction"
+msgid "Operation"
+msgstr "Operation"
 
 #: apps.py:7
 msgid "Payment"
@@ -184,7 +205,6 @@ msgid "payments"
 msgstr "paiements"
 
 #: models.py:65
-#| msgid "Payment %s (%s)"
 msgid "Payment {} ({})"
 msgstr "Paiement {} ({})"
 
@@ -211,3 +231,7 @@ msgstr "transaction"
 #: models.py:174
 msgid "transactions"
 msgstr "transactions"
+
+#: templates/admin/payment/form.html:8
+msgid "Home"
+msgstr "Accueil"
