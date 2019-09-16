@@ -23,7 +23,7 @@ is impossible to abstract over the myriad ways the different payment gateways do
 
 Here is a diagram of how the different parts interact:
 
-![payment with stripe sequence diagram](payment-with-stripe.png)
+![payment with stripe sequence diagram](stripe-authorization.png)
 
 
 Our changes

@@ -38,7 +38,7 @@ class Payment(models.Model):
     modified = models.DateTimeField(_('modified'), auto_now=True)
     charge_status = models.CharField(_('charge status'), max_length=20, choices=ChargeStatus.CHOICES,
                                      default=ChargeStatus.NOT_CHARGED)
-    token = models.CharField(_('token'), max_length=128, blank=True, default="")
+    token = models.CharField(_('token'), max_length=128, blank=True, default="", db_index=True)
     total = MoneyField(_('total'), max_digits=12, decimal_places=2)
     captured_amount = MoneyField(_('captured amount'), max_digits=12, decimal_places=2)
 
@@ -113,7 +113,7 @@ class Payment(models.Model):
         return self.is_active and self.not_charged
 
     def can_capture(self):
-        if not (self.is_active and self.not_charged):
+        if not (self.is_active and self.charge_status in [ChargeStatus.NOT_CHARGED, ChargeStatus.PARTIALLY_CHARGED]):
             return False
 
         _, gateway_config = get_payment_gateway(self.gateway)

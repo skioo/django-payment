@@ -1,0 +1,5 @@
+pytest-django
+flake8
+mypy
+python-language-server
+

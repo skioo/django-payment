@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='django-payment',
-    version='1.1',
+    version='1.2',
     description='',
     long_description='',
     author='Nicholas Wolff',
@@ -16,6 +16,7 @@ setup(
         'payment.migrations',
         'payment.gateways.dummy',
         'payment.gateways.stripe',
+        'payment.gateways.netaxept',
     ],
     package_data={
         'payment': [
@@ -32,6 +33,8 @@ setup(
         'django-countries',
         'dataclasses',
         'django-import-export',
+        'requests',
+        'xmltodict',
     ],
     license='MIT',
     classifiers=[

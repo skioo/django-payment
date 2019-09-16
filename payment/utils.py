@@ -66,8 +66,8 @@ def create_payment_information(
     if amount is None:
         amount = payment.total
 
-    return PaymentData(  # type:ignore
-        token=payment_token,  # The contract is not clear, is this optional or not?
+    return PaymentData(
+        token=payment_token,  # type: ignore # The contract is not clear, is this optional or not?
         amount=amount.amount,
         currency=amount.currency.code,
         billing=billing_address,

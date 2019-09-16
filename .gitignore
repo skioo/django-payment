@@ -17,3 +17,5 @@ test.db
 .idea
 *.iml
 
+# Code
+.vscode/

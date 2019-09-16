@@ -1,0 +1,12 @@
+<html>
+
+<body>
+
+<H3>Payments</H3>
+
+{% for payment in payments %}
+<div><a href="{%url 'view_payment' payment.id %}">Payment {{payment.id}} - {{payment.total}} ({{payment.gateway}}) </a></div>
+{% endfor %}
+
+</body>
+</html>

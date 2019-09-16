@@ -51,6 +51,7 @@ class TransactionKind:
     """Represents the type of a transaction.
 
     The following transactions types are possible:
+    - REGISTER - Some gateways require an initial register transaction, before authorizing.
     - AUTH - an amount reserved against the customer's funding source. Money
     does not change hands until the authorization is captured.
     - VOID - a cancellation of a pending authorization or capture.
@@ -59,6 +60,7 @@ class TransactionKind:
     - REFUND - full or partial return of captured funds to the customer.
     """
 
+    REGISTER = "register"
     AUTH = "auth"
     CAPTURE = "capture"
     VOID = "void"
@@ -67,6 +69,7 @@ class TransactionKind:
     # Which were authorized, but needs to be confirmed manually by staff
     # eg. Braintree with "submit_for_settlement" enabled
     CHOICES = [
+        (REGISTER, pgettext_lazy("transaction kind", "Registration")),
         (AUTH, pgettext_lazy("transaction kind", "Authorization")),
         (REFUND, pgettext_lazy("transaction kind", "Refund")),
         (CAPTURE, pgettext_lazy("transaction kind", "Capture")),

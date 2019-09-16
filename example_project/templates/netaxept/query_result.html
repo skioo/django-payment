@@ -1,0 +1,15 @@
+<html>
+<body>
+
+<p>Annulled: {{ query_response.annulled }}</p>
+
+<p>Authorized: {{ query_response.authorized }}</p>
+
+<p>Status code: {{ query_response.raw_response.status_code }}</p>
+
+<p>Raw response:
+<pre> {{ query_response.raw_response.text }} </pre>
+</p>
+
+</body>
+</html>
