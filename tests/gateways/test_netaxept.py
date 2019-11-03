@@ -265,6 +265,101 @@ def it_should_query(requests_post):
         raw_response=asdict(mock_response))
 
 
+@patch('requests.post')
+def it_should_handle_query_response_without_authorization_id(requests_post):
+    mock_response = MockResponse(
+        status_code=200,
+        url='https://test.epayment.nets.eu/Netaxept/Query.aspx',
+        encoding='ISO-8859-1',
+        reason='OK',
+        text="""<?xml version="1.0" encoding="utf-8"?>
+       <PaymentInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+         <MerchantId>11111111</MerchantId>
+         <QueryFinished>2019-10-14T10:15:07.2677951+02:00</QueryFinished>
+         <TransactionId>1111111111114cf693a1cf86123e0d8f</TransactionId>
+         <OrderInformation>
+            <Amount>700</Amount>
+            <Currency>NOK</Currency>
+            <OrderNumber>7</OrderNumber>
+            <OrderDescription> </OrderDescription>
+            <Fee>0</Fee>
+            <RoundingAmount>0</RoundingAmount>
+            <Total>700</Total>
+            <Timestamp>2019-09-11T16:30:06.967</Timestamp>
+        </OrderInformation>
+        <TerminalInformation>
+            <CustomerEntered>2019-09-11T16:30:08.513</CustomerEntered>
+            <CustomerRedirected>2019-09-11T16:30:24.903</CustomerRedirected>
+            <Browser>Chrome-Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.75 Safari/537.36</Browser>
+        </TerminalInformation>
+        <CustomerInformation>
+            <Email />
+            <IP>85.218.56.162</IP>
+            <PhoneNumber /> 
+            <CustomerNumber /> 
+            <FirstName /> 
+            <LastName /> 
+            <Address1 />   
+            <Address2 />  
+            <Postcode />   
+            <Town />  
+            <Country />   
+            <SocialSecurityNumber /> 
+            <CompanyName />   
+            <CompanyRegistrationNumber />  
+        </CustomerInformation>  
+        <Summary>
+            <AmountCaptured>700</AmountCaptured>
+            <AmountCredited>0</AmountCredited>
+            <Annulled>false</Annulled>
+            <Annuled>false</Annuled>
+            <Authorized>true</Authorized>
+        </Summary> 
+        <CardInformation>
+            <Issuer>Visa</Issuer>
+            <IssuerCountry>NO</IssuerCountry>
+            <MaskedPAN>492500******0004</MaskedPAN>
+            <PaymentMethod>Visa</PaymentMethod>
+            <ExpiryDate>2301</ExpiryDate>
+            <IssuerId>3</IssuerId>
+         </CardInformation>
+         <History>
+            <TransactionLogLine>
+                <DateTime>2019-09-11T16:30:06.967</DateTime>
+                <Operation>Register</Operation>
+            </TransactionLogLine>
+            <TransactionLogLine>
+                <DateTime>2019-09-11T16:30:24.81</DateTime>
+                <Description>127.0.0.1: Auto AUTH</Description>
+                <Operation>Auth</Operation>
+                <BatchNumber>672</BatchNumber>
+            </TransactionLogLine>
+         </History>
+         <ErrorLog>
+            <PaymentError>
+                <DateTime>2019-11-03T09:34:40.18</DateTime>
+                <Operation>Auth</Operation>
+                <ResponseCode>99</ResponseCode>
+                <ResponseSource>Netaxept</ResponseSource>
+                <ResponseText>Auth Reg Comp Failure) </ResponseText>
+            </PaymentError>
+         </ErrorLog>
+         <AuthenticationInformation />
+         <AvtaleGiroInformation />
+         <SecurityInformation>
+            <CustomerIPCountry>CH</CustomerIPCountry>
+            <IPCountryMatchesIssuingCountry>false</IPCountryMatchesIssuingCountry>
+         </SecurityInformation>
+       </PaymentInfo>""")
+    requests_post.return_value = mock_response
+    query_response = query(config=_netaxept_config, transaction_id='233abb21f18b47dc98469fb9000b1f21')
+    assert query_response == QueryResponse(
+        annulled=False,
+        authorized=True,
+        authorization_id=None,
+        raw_response=asdict(mock_response))
+
+
 ##############################################################################
 # SPI tests
 

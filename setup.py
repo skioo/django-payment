@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='django-payment',
-    version='1.2',
+    version='1.4',
     description='',
     long_description='',
     author='Nicholas Wolff',

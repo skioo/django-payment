@@ -191,7 +191,7 @@ def query(config: NetaxeptConfig, transaction_id: str) -> QueryResponse:
             summary = d['PaymentInfo']['Summary']
             annulled = summary['Annulled'] == 'true'
             authorized = summary['Authorized'] == 'true'
-            authorization_id = summary['AuthorizationId']
+            authorization_id = summary.get('AuthorizationId')  # AuthorizationId may be absent from the response
             return QueryResponse(
                 annulled=annulled,
                 authorized=authorized,

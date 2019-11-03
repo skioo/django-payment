@@ -53,7 +53,9 @@ def after_terminal(request):
     response_code = request.GET['responseCode']
     logger.info('netaxept-after-terminal', transaction_id=transaction_id, response_code=response_code)
 
-    if response_code == 'OK':
+    if response_code == 'Cancel':
+        return HttpResponse('Payment cancelled')
+    elif response_code == 'OK':
         payment = Payment.objects.get(token=transaction_id)
         try:
             # This will verify if the payment was indeed authorized.
@@ -63,10 +65,13 @@ def after_terminal(request):
             return HttpResponse('Error authorizing {}: {}'.format(payment.id, exc))
         else:
             return redirect('view_payment', payment_id=payment.id)
-    elif response_code == 'Cancel':
-        return HttpResponse('Payment cancelled')
-    else:
-        return HttpResponse('Payment error {}'.format(response_code))
+    else:  # The error case
+        payment = Payment.objects.get(token=transaction_id)
+        try:
+            # This will query the state of the payment in netaxept, and create a transaction object with all details
+            gateway_authorize(payment=payment, payment_token=payment.token)
+        finally:
+            return HttpResponse('Payment error {}'.format(response_code))
 
 
 def query(request: HttpRequest, transaction_id: str) -> HttpResponse:
