@@ -10,18 +10,18 @@ logger = get_logger()
 
 
 class NetaxeptException(Exception):
-    def __str__(self):
-        return repr(self.msg)
+    pass
 
 
 class PaymentAlreadyRegisteredAndAuthorized(NetaxeptException):
-    msg = 'Payment already registered and authorized'
+    def __str__(self):
+        return 'Payment already registered and authorized'
 
 
 def register_payment(payment: Payment) -> str:
     """
     This part of the process is unique to netaxept so it cannot be implemented inside the
-    payment generic SPI. This implies that a programmer that wants to use the netaxept gateway will have to know
+    payment generic SPI. This implies that a programmer who wants to use the netaxept gateway will have to know
     to call this specific function.
 
     This function:
