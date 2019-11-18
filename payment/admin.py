@@ -67,12 +67,13 @@ class TransactionInline(admin.TabularInline):
 
 @admin.register(Transaction)
 class TransactionAdmin(admin.ModelAdmin):
-    readonly_fields = ['created']
+    date_hierarchy = 'created'
+    ordering = ['-created']
+    list_filter = ['kind', 'is_success']
+    list_display = ['created', amount, 'kind', 'is_success', 'token', 'error']
+    search_fields = ['token', 'payment__id']
 
-    def has_module_permission(self, request):
-        # Prevent TransactionAdmin from appearing in the admin menu,
-        # to view a transaction detail users should start navigation from a Payment.
-        return False
+    readonly_fields = ['created']
 
 
 ##############################################################
