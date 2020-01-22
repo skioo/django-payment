@@ -1,0 +1,231 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-01-22 14:52+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+#: __init__.py:24
+msgctxt "Custom payment choice type"
+msgid "Manual"
+msgstr "Registrere"
+
+#: __init__.py:72
+msgctxt "transaction kind"
+msgid "Registration"
+msgstr "Registrering"
+
+#: __init__.py:73
+msgctxt "transaction kind"
+msgid "Authorization"
+msgstr "Autorisasjon"
+
+#: __init__.py:74
+msgctxt "transaction kind"
+msgid "Refund"
+msgstr "Refusjon"
+
+#: __init__.py:75
+msgctxt "transaction kind"
+msgid "Capture"
+msgstr "Registrere"
+
+#: __init__.py:76
+msgctxt "transaction kind"
+msgid "Void"
+msgstr "Tomt"
+
+#: __init__.py:100
+msgctxt "payment status"
+msgid "Not charged"
+msgstr "Ikke belastet"
+
+#: __init__.py:101
+msgctxt "payment status"
+msgid "Partially charged"
+msgstr "Delvis belastet"
+
+#: __init__.py:102
+msgctxt "payment status"
+msgid "Fully charged"
+msgstr "Fullt belastet"
+
+#: __init__.py:103
+msgctxt "payment status"
+msgid "Partially refunded"
+msgstr "Delvis refundert"
+
+#: __init__.py:104
+msgctxt "payment status"
+msgid "Fully refunded"
+msgstr "Fullt refundert"
+
+#: admin.py:29 models.py:168
+msgid "amount"
+msgstr "beløp\tbeløp"
+
+#: admin.py:37 models.py:37 models.py:162
+msgid "created"
+msgstr "opprettet"
+
+#: admin.py:45 models.py:38
+msgid "modified"
+msgstr "modifisert"
+
+#: admin.py:179 models.py:42
+msgid "total"
+msgstr "totalt"
+
+#: admin.py:185 models.py:43
+msgid "captured amount"
+msgstr "registrert beløp"
+
+#: admin.py:208
+msgid "Capture"
+msgstr "registrere"
+
+#: admin.py:213
+msgid "Refund"
+msgstr "Refusjon"
+
+#: admin.py:218
+msgid "Void"
+msgstr "Tomt"
+
+#: admin.py:222
+msgid "Operation"
+msgstr "Operasjon"
+
+#: apps.py:7
+msgid "Payment"
+msgstr "Sjekk alle betalinger"
+
+#: gateways/dummy/forms.py:9
+msgctxt "Payment status form field"
+msgid "Payment status"
+msgstr "Betalingsstatus"
+
+#: gateways/dummy/forms.py:27
+msgid ""
+"Setting charge status to {} directly is not supported. Please use the "
+"dashboard to refund partially."
+msgstr ""
+"Å sette status til {} direkte støttes ikke. Vennligst bruk\n"
+"dashboardet for delvis tilbakebetaling."
+
+#: gateways/stripe/errors.py:4
+msgctxt "Stripe payment error"
+msgid "Order was not authorized."
+msgstr "Bestillingen ble ikke autorisert."
+
+#: gateways/stripe/errors.py:6
+msgctxt "Stripe payment error"
+msgid "Order was not charged."
+msgstr "Bestillingen ble ikke belastet."
+
+#: gateways/stripe/forms.py:14
+msgctxt "Stripe payment gateway description"
+msgid "Total payment"
+msgstr "Betaling totalt"
+
+#: models.py:35
+msgid "gateway"
+msgstr "gateway"
+
+#: models.py:36
+msgid "is_active"
+msgstr "er_aktiv"
+
+#: models.py:39
+msgid "charge status"
+msgstr "ladestatus"
+
+#: models.py:41 models.py:165
+msgid "token"
+msgstr "token"
+
+#: models.py:45
+msgid "cc first digits"
+msgstr "cc første sifre"
+
+#: models.py:46
+msgid "cc last digits"
+msgstr "cc siste sifre"
+
+#: models.py:47
+msgid "cc brand"
+msgstr "cc merke"
+
+#: models.py:48
+msgid "cc exp month"
+msgstr "cc utløpsmåned"
+
+#: models.py:51
+msgid "cc exp year"
+msgstr "cc utløpsår"
+
+#: models.py:54
+msgid "customer email"
+msgstr "kunde e-post"
+
+#: models.py:56
+msgid "customer ip address"
+msgstr "kunde ip-adresse"
+
+#: models.py:57
+msgid "extra data"
+msgstr "ekstra data"
+
+#: models.py:60 models.py:164
+msgid "payment"
+msgstr "betaling"
+
+#: models.py:61
+msgid "payments"
+msgstr "betalinger"
+
+#: models.py:65
+msgid "Payment {} ({})"
+msgstr "Betaling {} ({})"
+
+#: models.py:166
+msgid "kind"
+msgstr "type"
+
+#: models.py:167
+msgid "is success"
+msgstr "er suksess"
+
+#: models.py:169
+msgid "error"
+msgstr "feil"
+
+#: models.py:170
+msgid "gateway response"
+msgstr "gateway respons"
+
+#: models.py:173
+msgid "transaction"
+msgstr "transaksjon"
+
+#: models.py:174
+msgid "transactions"
+msgstr "transaksjoner"
+
+#: templates/admin/payment/form.html:8
+msgid "Home"
+msgstr "Hjem"
+
+#: templates/admin/payment/form.html:20
+msgid "Submit"
+msgstr "Sende inn"
