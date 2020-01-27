@@ -1,7 +1,9 @@
 # flake8: noqa
 
 import os
+
 import sys
+from django.utils.translation import ugettext_lazy as _
 
 
 def abspath(*args):
@@ -47,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 STATIC_URL = '/static/'
@@ -78,6 +81,17 @@ TEMPLATES = [
         },
     },
 ]
+
+LANGUAGE_CODE = 'en'
+
+LANGUAGES = [
+    ('en', _('English')),
+    ('fr', _('French')),
+]
+
+USE_I18N = True
+
+USE_L10N = True
 
 DATETIME_FORMAT = 'Y-m-d @ H:i:s e'
 
