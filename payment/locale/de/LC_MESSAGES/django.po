@@ -1,0 +1,232 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-01-22 14:52+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: __init__.py:24
+msgctxt "Custom payment choice type"
+msgid "Manual"
+msgstr "Manuel"
+
+#: __init__.py:72
+msgctxt "transaction kind"
+msgid "Registration"
+msgstr "Anmeldung"
+
+#: __init__.py:73
+msgctxt "transaction kind"
+msgid "Authorization"
+msgstr "Genehmigung"
+
+#: __init__.py:74
+msgctxt "transaction kind"
+msgid "Refund"
+msgstr "Rückerstattung"
+
+#: __init__.py:75
+msgctxt "transaction kind"
+msgid "Capture"
+msgstr "Erfassung"
+
+#: __init__.py:76
+msgctxt "transaction kind"
+msgid "Void"
+msgstr "Leere"
+
+#: __init__.py:100
+msgctxt "payment status"
+msgid "Not charged"
+msgstr "Nicht geladen"
+
+#: __init__.py:101
+msgctxt "payment status"
+msgid "Partially charged"
+msgstr "Teilweise aufgeladen"
+
+#: __init__.py:102
+msgctxt "payment status"
+msgid "Fully charged"
+msgstr "Voll aufgeladen"
+
+#: __init__.py:103
+msgctxt "payment status"
+msgid "Partially refunded"
+msgstr "Teilweise erstattet"
+
+#: __init__.py:104
+msgctxt "payment status"
+msgid "Fully refunded"
+msgstr "Vollständig erstattet"
+
+#: admin.py:29 models.py:168
+msgid "amount"
+msgstr "Menge"
+
+#: admin.py:37 models.py:37 models.py:162
+msgid "created"
+msgstr "erstellt"
+
+#: admin.py:45 models.py:38
+msgid "modified"
+msgstr "geändert"
+
+#: admin.py:179 models.py:42
+msgid "total"
+msgstr "gesamt"
+
+#: admin.py:185 models.py:43
+msgid "captured amount"
+msgstr "erfasste Menge"
+
+#: admin.py:208
+msgid "Capture"
+msgstr "Erfassung"
+
+#: admin.py:213
+msgid "Refund"
+msgstr "Rückerstattung"
+
+#: admin.py:218
+msgid "Void"
+msgstr "Leere"
+
+#: admin.py:222
+msgid "Operation"
+msgstr "Betrieb"
+
+#: apps.py:7
+msgid "Payment"
+msgstr "Alle Zahlungen überprüfen"
+
+#: gateways/dummy/forms.py:9
+msgctxt "Payment status form field"
+msgid "Payment status"
+msgstr "Zahlungsstatus"
+
+#: gateways/dummy/forms.py:27
+msgid ""
+"Setting charge status to {} directly is not supported. Please use the "
+"dashboard to refund partially."
+msgstr ""
+"Das direkte Setzen des Ladestatus auf {} wird nicht unterstützt. Verwenden "
+"Sie dashboard teilweise zu erstatten."
+
+#: gateways/stripe/errors.py:4
+msgctxt "Stripe payment error"
+msgid "Order was not authorized."
+msgstr "Bestellung wurde nicht autorisiert."
+
+#: gateways/stripe/errors.py:6
+msgctxt "Stripe payment error"
+msgid "Order was not charged."
+msgstr "Bestellung wurde nicht berechnet."
+
+#: gateways/stripe/forms.py:14
+msgctxt "Stripe payment gateway description"
+msgid "Total payment"
+msgstr "Gesamtzahlung"
+
+#: models.py:35
+msgid "gateway"
+msgstr "tor"
+
+#: models.py:36
+msgid "is_active"
+msgstr "ist_aktiv"
+
+#: models.py:39
+msgid "charge status"
+msgstr "Ladestatus"
+
+#: models.py:41 models.py:165
+msgid "token"
+msgstr "Zeichen"
+
+#: models.py:45
+msgid "cc first digits"
+msgstr "cc erste Ziffern"
+
+#: models.py:46
+msgid "cc last digits"
+msgstr "cc letzte Ziffern"
+
+#: models.py:47
+msgid "cc brand"
+msgstr "cc Marke"
+
+#: models.py:48
+msgid "cc exp month"
+msgstr "cc Gült. Monat"
+
+#: models.py:51
+msgid "cc exp year"
+msgstr "cc Gült. Jahr"
+
+#: models.py:54
+msgid "customer email"
+msgstr "Kunden E-Mail"
+
+#: models.py:56
+msgid "customer ip address"
+msgstr "Kunden-IP-Adresse"
+
+#: models.py:57
+msgid "extra data"
+msgstr "zusätzliche Daten"
+
+#: models.py:60 models.py:164
+msgid "payment"
+msgstr "zahlung"
+
+#: models.py:61
+msgid "payments"
+msgstr "zahlungen"
+
+#: models.py:65
+msgid "Payment {} ({})"
+msgstr "Zahlung {} ({})"
+
+#: models.py:166
+msgid "kind"
+msgstr "Typ"
+
+#: models.py:167
+msgid "is success"
+msgstr "ist erfolgreich"
+
+#: models.py:169
+msgid "error"
+msgstr "error"
+
+#: models.py:170
+msgid "gateway response"
+msgstr "Gateway-Antwort"
+
+#: models.py:173
+msgid "transaction"
+msgstr "Transaktion"
+
+#: models.py:174
+msgid "transactions"
+msgstr "Transaktionen"
+
+#: templates/admin/payment/form.html:8
+msgid "Home"
+msgstr "Zuhause"
+
+#: templates/admin/payment/form.html:20
+msgid "Submit"
+msgstr "Einreichen"

@@ -87,6 +87,10 @@ LANGUAGE_CODE = 'en'
 LANGUAGES = [
     ('en', _('English')),
     ('fr', _('French')),
+    ('de', _('German')),
+    ('no', _('Norwegian')),
+    ('es', _('Spanish')),
+    ('it', _('Italian')),
 ]
 
 USE_I18N = True
